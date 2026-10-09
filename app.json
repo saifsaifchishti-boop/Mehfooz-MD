@@ -2,7 +2,7 @@
   "name": "Mehfooz-MD",
   "description": "Mehfooz MD WhatsApp Bot server. Click Deploy to spin up a brand-new, independent bot server.",
   "keywords": ["whatsapp", "bot", "node"],
-  "repository": "https://github.com/bubblevuofficial-ops/Mehfooz-MD",
+  "repository": "https://github.com/saifsaifchishti-boop/Mehfooz-MD",
   "buildpacks": [{ "url": "heroku/nodejs" }],
   "formation": {
     "web": { "quantity": 1, "size": "basic" }

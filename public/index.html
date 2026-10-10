@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehfooz MD // Pairing Panel</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  body { background: radial-gradient(circle at top right, #0a192f 0%, #030814 60%); color: #e2e8f0; min-height: 100vh; padding: 24px 14px 40px; }
+  a { text-decoration: none; color: inherit; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; flex-wrap: wrap; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .logo { width: 58px; height: 58px; border-radius: 16px; background: radial-gradient(circle, #0a3325, #030814); border: 2px solid #00ff88; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; color: #00ff88; box-shadow: 0 0 16px rgba(0,255,136,0.5); }
+  .title h1 { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+  .title h1 span { color: #00ff88; }
+  .title .sub { font-size: 11px; color: #94a3b8; letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
+  .title .tag { font-size: 10px; color: #00ff88; margin-top: 6px; letter-spacing: 1px; }
+  .connect { text-align: center; }
+  .connect .circle { width: 42px; height: 42px; border-radius: 50%; background: rgba(0,255,136,0.12); border: 1px solid #00ff88; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; }
+  .connect .lbl { font-size: 9px; color: #94a3b8; }
+  .contact-row { display: flex; align-items: center; gap: 14px; background: rgba(10,22,40,0.85); border: 1px solid rgba(0,255,136,0.2); border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  .contact-item { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; }
+  .contact-item .ic { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,255,136,0.12); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .contact-item .lbl { font-size: 9px; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; }
+  .contact-item .val { font-size: 13px; color: #fff; font-weight: 700; }
+  .divider { width: 1px; align-self: stretch; background: rgba(0,255,136,0.15); }
+  .card { background: rgba(10,22,40,0.85); border: 1px solid rgba(0,255,136,0.25); border-radius: 16px; padding: 20px; margin-bottom: 18px; position: relative; overflow: hidden; }
+  .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .card-head-left { display: flex; align-items: center; gap: 12px; }
+  .card-head .ic { width: 40px; height: 40px; border-radius: 50%; background: rgba(0,255,136,0.12); border: 1px solid rgba(0,255,136,0.3); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .card-head h2 { font-size: 15px; color: #fff; font-weight: 800; }
+  .card-head p { font-size: 10px; color: #94a3b8; margin-top: 2px; }
+  .wa-badge { width: 46px; height: 46px; border-radius: 50%; background: #00ff88; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px #00ff88; flex-shrink: 0; }
+  .field { margin-bottom: 16px; }
+  .field-label { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+  .field-sub { font-size: 10px; color: #94a3b8; margin-bottom: 8px; margin-left: 20px; }
+  select, .input-row { width: 100%; background: #030814; border: 1px solid rgba(0,255,136,0.3); border-radius: 10px; padding: 10px 12px; color: #fff; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+  select { appearance: none; cursor: pointer; }
+  .input-row .flag { font-size: 15px; }
+  .input-row .code { color: #94a3b8; font-size: 13px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 8px; }
+  .input-row input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 13px; }
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .btn { display: flex; align-items: center; gap: 10px; border-radius: 10px; padding: 12px 14px; cursor: pointer; border: 1px solid rgba(0,255,136,0.3); background: rgba(0,255,136,0.06); color: #fff; }
+  .btn.solid { background: linear-gradient(135deg, #00ff88, #00acc1); color: #030814; border: none; }
+  .btn .t { font-size: 12px; font-weight: 800; }
+  .btn .s { font-size: 9px; opacity: 0.75; }
+  .btn .chev { margin-left: auto; }
+  .code-card { background: #030814; border: 1px dashed rgba(0,255,136,0.4); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px; }
+  .code-card .ic { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(0,255,136,0.4); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .code-card .txt { flex: 1; }
+  .code-card .txt b { font-size: 12px; color: #fff; }
+  .code-card .txt .s { font-size: 9px; color: #94a3b8; }
+  #pairCodeBox { font-size: 14px; color: #00ff88; font-family: monospace; letter-spacing: 1px; margin-top: 6px; }
+  #copyCodeBtn { background: transparent; border: 1px solid rgba(0,255,136,0.4); color: #00ff88; padding: 7px 12px; border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .social-wrap { text-align: center; }
+  .social-title { font-size: 10px; color: #00ff88; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  .social-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 20px; }
+  .social-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .social-item .ic { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .social-item .name { font-size: 10px; color: #fff; font-weight: 600; }
+  .social-item .action { font-size: 9px; color: #00ff88; }
+  .footer-dev { text-align: center; font-size: 10px; color: #64748b; }
+  .footer-dev b { color: #00ff88; display: block; font-size: 12px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <div class="brand">
+            <div class="logo">MM</div>
+            <div class="title">
+                <h1 id="botTitle">Mehfooz <span>MD</span></h1>
+                <div class="sub">WhatsApp Bot</div>
+                <div class="tag">Simple &bull; Fast &bull; Secure</div>
+            </div>
+        </div>
+        <div class="connect">
+            <div class="circle">&#128222;</div>
+            <div class="lbl">Connect<br>Your World</div>
+        </div>
+    </div>
+
+    <div class="contact-row">
+        <div class="contact-item">
+            <span class="ic">&#128222;</span>
+            <div><div class="lbl">Owner Contact</div><div class="val" id="ownerVal">Loading...</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="contact-item">
+            <span class="ic">&#128172;</span>
+            <div><div class="lbl">Contact for Support</div><div class="val" style="font-size:11px;">Issues &middot; Help &middot; Queries</div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div class="card-head-left">
+                <span class="ic">&#128100;</span>
+                <div>
+                    <h2>Pair Your WhatsApp</h2>
+                    <p>Select a server, enter your number and get your code.</p>
+                </div>
+            </div>
+            <div class="wa-badge">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="#030814" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="field-label">&#128421; Select Server</div>
+            <div class="field-sub">Choose from available servers</div>
+            <select id="serverSelect"></select>
+        </div>
+
+        <div class="field">
+            <div class="field-label">&#128241; WhatsApp Number</div>
+            <div class="field-sub">Enter your number (e.g. 92xxxxxxxxxx)</div>
+            <div class="input-row">
+                <span class="flag">&#127477;&#127472;</span>
+                <span class="code">+92</span>
+                <input type="text" id="phoneNumber" placeholder="3xxxxxxxxx">
+            </div>
+        </div>
+
+        <div class="btn-row">
+            <a href="#" id="qrBtn" class="btn">
+                <span>&#9638;&#9638;</span>
+                <span><div class="t">Get QR Code</div><div class="s">Scan with WhatsApp</div></span>
+                <span class="chev">&#8250;</span>
+            </a>
+            <a href="#" id="pairBtn" class="btn solid">
+                <span>&lt;/&gt;</span>
+                <span><div class="t">Get Pairing Code</div><div class="s">Receive code to pair</div></span>
+                <span class="chev">&#8250;</span>
+            </a>
+        </div>
+
+        <div class="code-card">
+            <span class="ic">&lt;/&gt;</span>
+            <div class="txt">
+                <b>Your Pairing Code</b>
+                <div class="s">Copy this code and paste it in WhatsApp</div>
+                <div id="pairCodeBox">CODE: ---</div>
+            </div>
+            <button id="copyCodeBtn">&#128203; Copy</button>
+        </div>
+    </div>
+
+    <div class="social-wrap">
+        <div class="social-title">Join Our Channels</div>
+        <div class="social-row" id="socialRow"></div>
+        <div class="footer-dev">Developed by<b>Saif Chishti</b></div>
+    </div>
+</div>
+
+<script>
+    // ─── Yahan naya server add karein ───
+    // Har naye Heroku app ke baad, yahan ek nayi line add kar dein.
+    const SERVERS = [
+        { name: "Server 1", url: "https://mehfooz2-3e50890a3a4a.herokuapp.com", load: "Low" }
+        // { name: "Server 2", url: "https://mehfooz-89e0fa8d53fe.herokuapp.com", load: "Medium" },
+    ];
+
+    let lastPairCode = '';
+    const select = document.getElementById('serverSelect');
+    select.innerHTML = SERVERS.map((s, i) => `<option value="${i}">${s.name} — ${s.load || 'Low'} load</option>`).join('');
+
+    function currentServer() { return SERVERS[select.value]; }
+
+    // Pull live branding + social links + owner contact from the first server
+    (async () => {
+        if (SERVERS.length === 0) return;
+        try {
+            const res = await fetch(SERVERS[0].url + '/api/public-info');
+            const info = await res.json();
+            if (info.ownerNumber) document.getElementById('ownerVal').innerText = '+' + info.ownerNumber;
+            const socials = [
+                { key: 'socialYoutube', name: 'YouTube', action: 'Subscribe', icon: '&#9654;', bg: 'rgba(239,68,68,0.15)', color: '#ef4444' },
+                { key: 'socialInstagram', name: 'Instagram', action: 'Follow', icon: '&#128248;', bg: 'rgba(236,72,153,0.15)', color: '#ec4899' },
+                { key: 'channelLink', name: 'WhatsApp Channel', action: 'Join', icon: '&#128222;', bg: 'rgba(0,255,136,0.15)', color: '#00ff88' },
+                { key: 'socialTelegram', name: 'Telegram', action: 'Join', icon: '&#9992;', bg: 'rgba(56,189,248,0.15)', color: '#38bdf8' }
+            ];
+            document.getElementById('socialRow').innerHTML = socials.map(s => `
+                <a class="social-item" href="${info[s.key] || '#'}" target="_blank">
+                    <span class="ic" style="background:${s.bg};color:${s.color};">${s.icon}</span>
+                    <span class="name">${s.name}</span><span class="action">${s.action}</span>
+                </a>
+            `).join('');
+        } catch (e) {
+            document.getElementById('ownerVal').innerText = 'Not set';
+        }
+    })();
+
+    document.getElementById('qrBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(currentServer().url + '/refresh-qr?id=new', '_blank');
+    });
+
+    document.getElementById('pairBtn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        const num = document.getElementById('phoneNumber').value.trim().replace(/[^0-9]/g, '');
+        const box = document.getElementById('pairCodeBox');
+        if (!num) { alert('Apna WhatsApp number daalein.'); return; }
+        const fullNumber = '92' + num.replace(/^0+/, '');
+        box.innerText = 'REQUESTING...';
+        try {
+            const res = await fetch(currentServer().url + '/get-pairing-code?number=' + encodeURIComponent(fullNumber) + '&sessionId=new&agree=1');
+            const data = await res.json();
+            if (data.code) {
+                lastPairCode = data.code;
+                box.innerText = 'CODE: ' + data.code;
+            } else {
+                box.innerText = 'ERROR: ' + (data.message || data.error || 'Failed');
+            }
+        } catch (err) {
+            box.innerText = 'CONNECTION ERROR';
+        }
+    });
+
+    document.getElementById('copyCodeBtn').addEventListener('click', () => {
+        if (!lastPairCode) return;
+        navigator.clipboard.writeText(lastPairCode).catch(() => {});
+    });
+</script>
+</body>
+</html>

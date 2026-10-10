@@ -1,0 +1,5 @@
+{
+  "installCommand": "echo skip",
+  "buildCommand": "mkdir -p public && cp servers.json public/servers.json",
+  "outputDirectory": "public"
+}
